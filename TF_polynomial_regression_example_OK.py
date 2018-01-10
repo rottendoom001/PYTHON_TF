@@ -16,8 +16,12 @@ ax.scatter(xs, ys)
 fig.show()
 plt.draw()
 
+print("xs:",xs.shape)
+print("ys:",ys.shape)
+
 # %% tf.placeholders for the input and output of the network. Placeholders are
 # variables which we need to fill in when we are ready to compute the graph.
+
 X = tf.placeholder(tf.float32)
 Y = tf.placeholder(tf.float32)
 
@@ -25,11 +29,9 @@ Y = tf.placeholder(tf.float32)
 # of different polynomial degrees.  We will then learn the influence that each
 # degree of the input (X^0, X^1, X^2, ...) has on the final output (Y).
 Y_pred = tf.Variable(tf.random_normal([1]), name='bias')
-
-print (Y_pred)
 print ('/////////////')
 for pow_i in range(1, 5):
-    W = tf.Variable(tf.random_normal([1]), name='weight_%d' %  pow_i)
+    W = tf.Variable(tf.random_normal([1]))
     Y_pred = tf.add(tf.multiply(tf.pow(X, pow_i), W), Y_pred)
 # %% Loss function will measure the distance between our observations
 # and predictions and average over them.
